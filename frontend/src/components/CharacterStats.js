@@ -1,7 +1,9 @@
+import { useState } from "react";
 import { useCharactersContext } from "../hooks/useCharactersContext";
 
 const CharacterStats = ({ character }) => {
   const { dispatch } = useCharactersContext();
+  const [swtch, setSwtch] = useState(true);
   const handleClick = async () => {
     const response = await fetch("/api/characters/" + character._id, {
       method: "DELETE",
@@ -11,6 +13,11 @@ const CharacterStats = ({ character }) => {
     if (response.ok) {
       dispatch({ type: "DELETE_CHARACTER", payload: json });
     }
+  };
+
+  const handleEdit = () => {
+    if (swtch) setSwtch(false);
+    else setSwtch(true);
   };
 
   const handleIncrement = async () => {
@@ -56,7 +63,9 @@ const CharacterStats = ({ character }) => {
       </p>
       <p>
         <strong>Alignment : </strong>
-        {character.alignment}
+        {swtch && character.alignment}
+        {!swtch && <input />}
+        <button onClick={handleEdit}>Edit</button>
       </p>
       <span className="material-symbols-outlined" onClick={handleClick}>
         delete
