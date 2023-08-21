@@ -79,12 +79,22 @@ header a {
   color: #333;
 }
 
+.character-stats button {
+  background: var(--primary);
+  margin: 3px;
+  border: 0;
+  color: #fff;
+  font-family: "Times New Roman";
+  border-radius: 4px;
+  cursor: pointer;
+}
+
 label,
-.character-form input {
+.form input {
   display: block;
 }
 
-.character-form input {
+.form input {
   padding: 10px;
   margin-top: 10px;
   margin-bottom: 20px;
@@ -99,7 +109,7 @@ form button {
   border: 0;
   color: #fff;
   padding: 10px;
-  font-family: "Poppins";
+  font-family: "Times New Roman";
   border-radius: 4px;
   cursor: pointer;
 }
@@ -111,10 +121,6 @@ div.error {
   color: var(--error);
   border-radius: 4px;
   margin: 20px 0;
-}
-
-input.error {
-  border: 1px solid var(--error);
 }
 
 input.error {
