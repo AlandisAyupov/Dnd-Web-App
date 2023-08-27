@@ -1,4 +1,5 @@
 import { useState } from "react";
+import styles from "./Dice.modules.css";
 
 const Dice = () => {
   const [num, setNum] = useState(0);
@@ -13,7 +14,7 @@ const Dice = () => {
     setSides(sides - 1);
   };
   return (
-    <div>
+    <div class="dice">
       <h1>Value:</h1>
       <p>{num}</p>
       <h1>Sided Die:</h1>
