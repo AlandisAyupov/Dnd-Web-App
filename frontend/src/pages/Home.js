@@ -6,10 +6,6 @@ const Home = () => {
   const { characters, dispatch } = useCharactersContext();
   const [word, setWord] = useState("");
 
-  const eventHandler = (e) => {
-    setWord(e.target.value);
-  };
-
   useEffect(() => {
     const fetchCharacters = async () => {
       const response = await fetch("/api/characters");
