@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import CharacterStats from "../../components/CharacterStats";
 import { useCharactersContext } from "../../hooks/useCharactersContext";
+import styles from "./Home.modules.css";
 
 const Home = () => {
   const { characters, dispatch } = useCharactersContext();
@@ -21,7 +22,7 @@ const Home = () => {
 
   return (
     <div className="home">
-      <div className="search-wrapper">
+      <div className="search-wrapper" style={styles}>
         <label for="search">Search</label>
         <input
           type="text"
