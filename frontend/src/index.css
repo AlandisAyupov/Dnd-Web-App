@@ -1,7 +1,5 @@
-/* google font */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;800&family=VT323&display=swap');
 
-/* layout */
 :root {
   --primary: #1aac83;
   --error: #e7195a;
@@ -10,7 +8,7 @@
 body {
   background: #f1f1f1;
   margin: 0;
-  font-family: "Poppins";
+  font-family: "Times New Roman";
 }
 
 header {
@@ -23,7 +21,13 @@ header .container {
   padding: 10px 20px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  font-weight: bold;
+}
+
+header .container h1 {
+  padding: 10px 20px;
+  border: solid;
+  background-color: lightgreen;
 }
 
 header a {
@@ -37,7 +41,6 @@ header a {
   margin: 0 auto;
 }
 
-/* homepage */
 .home {
   display: grid;
   grid-template-columns: 3fr 1fr;
@@ -54,9 +57,9 @@ header a {
 }
 
 .character-stats h4 {
-  margin: 0 0 10px 0;
-  font-size: 1.2em;
-  color: var(--primary);
+  margin: 0 0 20px 0;
+  font-size: 1.6em;
+  font-weight: bold;
 }
 
 .character-stats p {
@@ -76,13 +79,22 @@ header a {
   color: #333;
 }
 
-/* new character form */
+.character-stats button {
+  background: var(--primary);
+  margin: 3px;
+  border: 0;
+  color: #fff;
+  font-family: "Times New Roman";
+  border-radius: 4px;
+  cursor: pointer;
+}
+
 label,
-input {
+.form input {
   display: block;
 }
 
-input {
+.form input {
   padding: 10px;
   margin-top: 10px;
   margin-bottom: 20px;
@@ -97,7 +109,7 @@ form button {
   border: 0;
   color: #fff;
   padding: 10px;
-  font-family: "Poppins";
+  font-family: "Times New Roman";
   border-radius: 4px;
   cursor: pointer;
 }

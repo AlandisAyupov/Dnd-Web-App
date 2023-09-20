@@ -1,5 +1,5 @@
-const Character = require("../models/characterModel.js");
-const mongoose = require("mongoose");
+import Character from "../models/characterModel.js";
+import mongoose from "mongoose";
 
 const getCharacters = async (req, res) => {
   const characters = await Character.find({});
@@ -16,13 +16,13 @@ const getCharacter = async (req, res) => {
 };
 
 const createCharacter = async (req, res) => {
+  console.log("req.file", req.file);
   const { name, charClass, level, alignment } = req.body;
 
   let emptyFields = [];
   if (!name) emptyFields.push("name");
   if (!charClass) emptyFields.push("charClass");
   if (!level) emptyFields.push("level");
-  if (!alignment) emptyFields.push("alignment");
   if (emptyFields.length > 0) {
     return res
       .status(400)
@@ -70,7 +70,7 @@ const updateCharacter = async (req, res) => {
   res.status(200).json(character);
 };
 
-module.exports = {
+export {
   getCharacters,
   getCharacter,
   createCharacter,

@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useCharactersContext } from "../hooks/useCharactersContext.js";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const CharacterForm = () => {
   const { dispatch } = useCharactersContext();
@@ -7,8 +9,11 @@ const CharacterForm = () => {
   const [charClass, setCharClass] = useState("");
   const [level, setLevel] = useState("");
   const [alignment, setAlignment] = useState("");
+  const [file, setFile] = useState("");
   const [error, setError] = useState(null);
   const [emptyFields, setEmptyFields] = useState([]);
+
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -37,6 +42,11 @@ const CharacterForm = () => {
       setAlignment("");
       dispatch({ type: "CREATE_CHARACTER", payload: json });
     }
+  };
+
+  const fileSelected = (event) => {
+    const file = event.target.files[0];
+    setFile(file);
   };
 
   return (
@@ -72,7 +82,6 @@ const CharacterForm = () => {
         type="text"
         onChange={(e) => setAlignment(e.target.value)}
         value={alignment}
-        className={emptyFields.includes("alignment") ? "error" : ""}
       />
 
       <button>Add Character</button>

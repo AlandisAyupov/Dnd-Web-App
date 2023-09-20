@@ -1,12 +1,12 @@
-const express = require("express");
+import express from "express";
 const router = express.Router();
-const {
+import {
   getCharacters,
   getCharacter,
   createCharacter,
   deleteCharacter,
   updateCharacter,
-} = require("../controllers/characterControllers.js");
+} from "../controllers/characterControllers.js";
 
 router.get("/", getCharacters);
 
@@ -18,4 +18,4 @@ router.delete("/:id", deleteCharacter);
 
 router.patch("/:id", updateCharacter);
 
-module.exports = router;
+export default router;

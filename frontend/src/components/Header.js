@@ -10,6 +10,15 @@ const Header = () => {
         <Link to="/form">
           <h1>Form</h1>
         </Link>
+        <Link to="/dice">
+          <h1>Roll</h1>
+        </Link>
+        <Link to="/create">
+          <h1>Create Profile</h1>
+        </Link>
+        <Link to="/profiles">
+          <h1>Users</h1>
+        </Link>
       </div>
     </header>
   );

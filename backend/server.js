@@ -1,8 +1,10 @@
-const express = require("express");
-require("dotenv").config();
-const mongoose = require("mongoose");
+import express from "express";
+import dotenv from "dotenv";
+dotenv.config();
+import mongoose from "mongoose";
 const app = express();
-const routes = require("./routes/characters");
+import router from "./routes/characters.js";
+import routes2 from "./routes/profiles.js";
 
 app.use(express.json());
 
@@ -11,7 +13,8 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use("/api/characters", routes);
+app.use("/api/characters", router);
+app.use("/api/profiles", routes2);
 
 mongoose
   .connect(process.env.DB)
