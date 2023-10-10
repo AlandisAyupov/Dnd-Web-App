@@ -2,22 +2,29 @@ import { useEffect, useState } from "react";
 import CharacterStats from "../../components/CharacterStats";
 import { useCharactersContext } from "../../hooks/useCharactersContext";
 import styles from "./Home.modules.css";
+import { useAuthContext } from "../../hooks/useAuthContext";
 
 const Home = () => {
   const { characters, dispatch } = useCharactersContext();
   const [word, setWord] = useState("");
+  const { profile } = useAuthContext();
 
   useEffect(() => {
     const fetchCharacters = async () => {
-      const response = await fetch("/api/characters");
+      const response = await fetch("/api/characters", {
+        headers: {
+          Authorization: `Bearer ${profile.token}`,
+        },
+      });
       const json = await response.json();
 
       if (response.ok) {
         dispatch({ type: "SET_CHARACTERS", payload: json });
       }
     };
-
-    fetchCharacters();
+    if (profile) {
+      fetchCharacters();
+    }
   }, []);
 
   return (

@@ -18,6 +18,10 @@ const characterSchema = new Schema({
   alignment: {
     type: String,
   },
+  profileID: {
+    type: String,
+    required: true,
+  },
 });
 
 export default mongoose.model("Character", characterSchema);

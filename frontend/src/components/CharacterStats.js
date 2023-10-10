@@ -1,15 +1,21 @@
 import { useState } from "react";
 import { useCharactersContext } from "../hooks/useCharactersContext";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 const CharacterStats = ({ character }) => {
   const { dispatch } = useCharactersContext();
   const [swtch, setSwtch] = useState(true);
   const [alignment, setAlignment] = useState("");
   const [emptyFields, setEmptyFields] = useState([]);
+  const { profile } = useAuthContext();
 
   const handleClick = async () => {
+    if (!profile) return;
     const response = await fetch("/api/characters/" + character._id, {
       method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${profile.token}`,
+      },
     });
     const json = await response.json();
 
@@ -24,9 +30,13 @@ const CharacterStats = ({ character }) => {
   };
 
   const handleChange = async () => {
+    if (!profile) return;
     const update = await fetch("/api/characters/" + character._id, {
       method: "PATCH",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${profile.token}`,
+      },
       body: JSON.stringify({ alignment: alignment }),
     });
     const json = await update.json();
@@ -38,9 +48,13 @@ const CharacterStats = ({ character }) => {
   };
 
   const handleIncrement = async () => {
+    if (!profile) return;
     const update = await fetch("/api/characters/" + character._id, {
       method: "PATCH",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${profile.token}`,
+      },
       body: JSON.stringify({ level: character.level + 1 }),
     });
     const json = await update.json();
@@ -51,10 +65,14 @@ const CharacterStats = ({ character }) => {
   };
 
   const handleDecrement = async () => {
+    if (!profile) return;
     if (character.level >= 1) {
       const update = await fetch("/api/characters/" + character._id, {
         method: "PATCH",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${profile.token}`,
+        },
         body: JSON.stringify({ level: character.level - 1 }),
       });
       const json = await update.json();

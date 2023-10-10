@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import crypto from "crypto";
 import sharp from "sharp";
+import jwt from "jsonwebtoken";
 dotenv.config();
 import {
   S3Client,
@@ -23,6 +24,10 @@ const s3 = new S3Client({
   region,
 });
 
+const createToken = (_id) => {
+  return jwt.sign({ _id }, process.env.SECRET, { expiresIn: "3d" });
+};
+
 const getProfiles = async (req, res) => {
   const profiles = await Profile.find({});
   for (const profile of profiles) {
@@ -40,38 +45,46 @@ const getProfiles = async (req, res) => {
 const getProfile = async (req, res) => {};
 
 const createProfile = async (req, res) => {
-  console.log("req.body", req.body);
-  console.log("req.file", req.file);
   const imgName = randomName();
-  const buffer = await sharp(req.file.buffer)
-    .resize({ height: 500, width: 500, fit: "contain" })
-    .toBuffer();
-  const params = {
-    Bucket: bucketName,
-    Key: imgName,
-    Body: buffer,
-    ContentType: req.file.mimetype,
-  };
   try {
-    const command = new PutObjectCommand(params);
-    await s3.send(command);
+    if (req.file.buffer !== void 0) {
+      const buffer = await sharp(req.file.buffer)
+        .resize({ height: 500, width: 500, fit: "contain" })
+        .toBuffer();
+      const params = {
+        Bucket: bucketName,
+        Key: imgName,
+        Body: buffer,
+        ContentType: req.file.mimetype,
+      };
+      const command = new PutObjectCommand(params);
+      await s3.send(command);
+    }
   } catch (error) {
     console.log(error);
   }
-  const profile = await Profile.create({
-    name: imgName,
-  });
-  res.status(200).json(profile);
+  try {
+    const profile = await Profile.signup(
+      imgName,
+      req.body.username,
+      req.body.email,
+      req.body.password
+    );
+    const token = createToken(profile._id);
+    res.status(200).json({ profile, token });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
 };
 
 const deleteProfile = async (req, res) => {
   const { id } = req.params;
   const profile = await Profile.findById(id);
   if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(400).json({ error: "No such character" });
+    return res.status(400).json({ error: "No such profile" });
   }
   if (!profile) {
-    res.status(404).json({ error: "No such character." });
+    res.status(404).json({ error: "No such profile." });
   }
   const params = {
     Bucket: bucketName,
@@ -79,10 +92,28 @@ const deleteProfile = async (req, res) => {
   };
   const command = DeleteObjectCommand(params);
   await s3.send(command);
-  await Character.findOneAndDelete({ _id: id });
+  await Profile.findOneAndDelete({ _id: id });
   res.status(200).json(profile);
 };
 
 const updateProfile = async (req, res) => {};
 
-export { getProfiles, getProfile, createProfile, deleteProfile, updateProfile };
+const loginProfile = async (req, res) => {
+  const { password, email } = req.body;
+  try {
+    const profile = await Profile.login(email, password);
+    const token = createToken(profile._id);
+    res.status(200).json({ profile, token });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
+
+export {
+  getProfiles,
+  getProfile,
+  createProfile,
+  deleteProfile,
+  updateProfile,
+  loginProfile,
+};

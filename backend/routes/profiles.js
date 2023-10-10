@@ -10,13 +10,16 @@ import {
   createProfile,
   deleteProfile,
   updateProfile,
+  loginProfile,
 } from "../controllers/profileControllers.js";
 
 router.get("/", getProfiles);
 
 router.get("/:id", getProfile);
 
-router.post("/", upload.single("image"), createProfile);
+router.post("/signup", upload.single("image"), createProfile);
+
+router.post("/login", loginProfile);
 
 router.delete("/:id", deleteProfile);
 

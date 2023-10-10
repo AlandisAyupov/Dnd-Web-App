@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useCharactersContext } from "../hooks/useCharactersContext.js";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useAuthContext } from "../hooks/useAuthContext.js";
 
 const CharacterForm = () => {
   const { dispatch } = useCharactersContext();
@@ -12,11 +13,17 @@ const CharacterForm = () => {
   const [file, setFile] = useState("");
   const [error, setError] = useState(null);
   const [emptyFields, setEmptyFields] = useState([]);
+  const { profile } = useAuthContext();
 
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!profile) {
+      setError("Must be logged in.");
+      return;
+    }
 
     const character = { name, charClass, level, alignment };
 
@@ -25,6 +32,7 @@ const CharacterForm = () => {
       body: JSON.stringify(character),
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${profile.token}`,
       },
     });
     const json = await response.json();

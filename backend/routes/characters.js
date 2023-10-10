@@ -1,5 +1,4 @@
 import express from "express";
-const router = express.Router();
 import {
   getCharacters,
   getCharacter,
@@ -7,6 +6,9 @@ import {
   deleteCharacter,
   updateCharacter,
 } from "../controllers/characterControllers.js";
+import requireAuth from "../middleware/requireAuth.js";
+const router = express.Router();
+router.use(requireAuth);
 
 router.get("/", getCharacters);
 

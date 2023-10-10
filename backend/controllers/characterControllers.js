@@ -2,7 +2,8 @@ import Character from "../models/characterModel.js";
 import mongoose from "mongoose";
 
 const getCharacters = async (req, res) => {
-  const characters = await Character.find({});
+  const profileID = req.profile._id;
+  const characters = await Character.find({ profileID });
   res.status(200).json(characters);
 };
 
@@ -30,11 +31,13 @@ const createCharacter = async (req, res) => {
   }
 
   try {
+    const profileID = req.profile._id;
     const character = await Character.create({
       name,
       charClass,
       level,
       alignment,
+      profileID,
     });
     res.status(200).json(character);
   } catch (error) {

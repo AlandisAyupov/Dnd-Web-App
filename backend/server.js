@@ -3,8 +3,8 @@ import dotenv from "dotenv";
 dotenv.config();
 import mongoose from "mongoose";
 const app = express();
-import router from "./routes/characters.js";
-import routes2 from "./routes/profiles.js";
+import cRoutes from "./routes/characters.js";
+import pRoutes from "./routes/profiles.js";
 
 app.use(express.json());
 
@@ -13,8 +13,8 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use("/api/characters", router);
-app.use("/api/profiles", routes2);
+app.use("/api/characters", cRoutes);
+app.use("/api/profiles", pRoutes);
 
 mongoose
   .connect(process.env.DB)
