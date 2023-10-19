@@ -14,7 +14,7 @@ const Dice = () => {
     setSides(sides - 1);
   };
   return (
-    <div class="dice">
+    <div class="dice" style={styles}>
       <h1>Value:</h1>
       <p>{num}</p>
       <h1>Sided Die:</h1>

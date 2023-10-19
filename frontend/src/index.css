@@ -28,6 +28,8 @@ header .container h1 {
   padding: 10px 20px;
   border: solid;
   background-color: lightgreen;
+  background-image: linear-gradient(to left, #66eb54, #08eea1);
+  margin: 20px
 }
 
 header a {

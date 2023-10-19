@@ -3,6 +3,7 @@
   border: solid;
   display: inline-block;
   background-color: lightgreen;
+  margin: 20px
 }
 
 .dice p {
@@ -11,4 +12,14 @@
   border: solid;
   display: inline-block;
   background-color: orange;
+  margin: 20px
+}
+
+.dice button {
+  padding: 10px;
+  font-size: 1.2em;
+  border: solid;
+  display: inline-block;
+  background-color: rgba(115, 110, 24, 0.819);
+  margin: 5px
 }
