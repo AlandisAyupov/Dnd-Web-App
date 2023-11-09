@@ -13,8 +13,10 @@ import {
 } from "@aws-sdk/client-s3";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 
+//encryption
 const randomName = (bytes = 32) => crypto.randomBytes(bytes).toString("hex");
 
+//Environmental Variables.
 const bucketName = process.env.AWS_BUCKET_NAME;
 const region = process.env.AWS_BUCKET_REGION;
 const accessKeyId = process.env.AWS_ACCESS_KEY_ID;
@@ -24,10 +26,12 @@ const s3 = new S3Client({
   region,
 });
 
+//Token creation
 const createToken = (_id) => {
-  return jwt.sign({ _id }, process.env.SECRET, { expiresIn: "3d" });
+  return jwt.sign({ _id }, process.env.SECRET, { expiresIn: "1y" });
 };
 
+//HTTP requests
 const getProfiles = async (req, res) => {
   const profiles = await Profile.find({});
   for (const profile of profiles) {
@@ -42,7 +46,14 @@ const getProfiles = async (req, res) => {
   res.send(profiles);
 };
 
-const getProfile = async (req, res) => {};
+const getProfile = async (req, res) => {
+  const { username } = req.params;
+  const profile = await Profile.find({ username: username });
+  if (!profile) {
+    res.status(404).json({ error: "No such profile." });
+  }
+  res.status(200).json({ profile });
+};
 
 const createProfile = async (req, res) => {
   const imgName = randomName();
@@ -71,7 +82,8 @@ const createProfile = async (req, res) => {
       req.body.password
     );
     const token = createToken(profile._id);
-    res.status(200).json({ profile, token });
+    console.log(profile);
+    res.status(200).json({ email, token });
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
@@ -100,10 +112,11 @@ const updateProfile = async (req, res) => {};
 
 const loginProfile = async (req, res) => {
   const { password, email } = req.body;
+  console.log(req.body);
   try {
     const profile = await Profile.login(email, password);
     const token = createToken(profile._id);
-    res.status(200).json({ profile, token });
+    res.status(200).json({ email, token });
   } catch (error) {
     res.status(400).json({ error: error.message });
   }

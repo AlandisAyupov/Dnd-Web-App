@@ -31,7 +31,7 @@ function App() {
               element={!profile ? <Login /> : <Navigate to="/" />}
             />
             <Route
-              path="/create"
+              path="/signup"
               element={!profile ? <CreateProfile /> : <Navigate to="/" />}
             />
             <Route path="/form" element={<Form />} />

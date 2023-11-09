@@ -4,6 +4,10 @@ export const AuthContext = createContext();
 
 export const authReducer = (state, action) => {
   switch (action.type) {
+    case "GET_PROFILE":
+      return {
+        profile: state.profile.map((p) => p.email === action.payload.email),
+      };
     case "LOGIN":
       return { profile: action.payload };
     case "LOGOUT":
@@ -15,12 +19,11 @@ export const authReducer = (state, action) => {
 
 export const AuthContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(authReducer, {
-    profiles: null,
+    profile: null,
   });
 
   useEffect(() => {
     const profile = JSON.parse(localStorage.getItem("profile"));
-
     if (profile) {
       dispatch({ type: "LOGIN", payload: profile });
     }

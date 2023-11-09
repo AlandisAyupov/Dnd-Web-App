@@ -4,6 +4,7 @@ import validator from "validator";
 
 const Schema = mongoose.Schema;
 
+//Profile schema
 const profileSchema = new Schema({
   name: {
     type: String,
@@ -27,6 +28,7 @@ const profileSchema = new Schema({
   },
 });
 
+//Sign up function & prerequisite checks.
 profileSchema.statics.signup = async function (
   name,
   username,
@@ -62,6 +64,7 @@ profileSchema.statics.signup = async function (
   }
 };
 
+//Login function and checks.
 profileSchema.statics.login = async function (email, password) {
   if (!email || !password) {
     throw Error("Fields must be filled");

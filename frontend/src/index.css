@@ -27,8 +27,9 @@ header .container {
 header .container h1 {
   padding: 10px 20px;
   border: solid;
-  background-color: lightgreen;
-  background-image: linear-gradient(to left, #66eb54, #08eea1);
+  background-color: rgba(165, 42, 42, 0.748);
+  background-image: linear-gradient(to left, #eb545468, #0fdd98);
+  border-radius: 5px;
   margin: 20px
 }
 
@@ -145,17 +146,42 @@ header button {
   border: 2px solid var(--primary);
   padding: 6px 10px;
   border-radius: 4px;
-  font-family: "Poppins";
+  font-family: "Times New Roman";
   cursor: pointer;
   font-size: 1em;
 }
 
 /* auth forms */
-form.signup,
+form.create {
+  max-width: 400px;
+  margin: 40px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 4px;
+}
+
 form.login {
   max-width: 400px;
   margin: 40px auto;
   padding: 20px;
   background: #fff;
   border-radius: 4px;
+}
+
+.container img {
+  border-radius: 100%;
+  border-color: black;
+  border: 1px solid;
+  height: 50px;
+  width: 50px;
+  margin: 20px;
+  position: absolute;
+  top: 0;
+}
+
+.container button {
+  margin: 10px;
+  background-color: rgba(165, 42, 42, 0.714);
+  border-color: black;
+  color: black;
 }

@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 
 const Schema = mongoose.Schema;
 
+//Character Schema
 const characterSchema = new Schema({
   name: {
     type: String,

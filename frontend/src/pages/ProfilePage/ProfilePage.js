@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import styles from "./ProfilePage.modules.css";
 
 const ProfilePage = () => {
   const [profiles, setProfiles] = useState([]);
@@ -8,7 +9,7 @@ const ProfilePage = () => {
 
   useEffect(() => {
     async function getProfiles() {
-      const result = await axios.get("/api/profiles");
+      const result = await axios.get("/api/profile");
       setProfiles(result.data);
     }
     getProfiles();
@@ -19,12 +20,20 @@ const ProfilePage = () => {
       <div className="flex flex-col space-y-100 items-center divide-y">
         {profiles.map((profile) => (
           <div key={`profile-${profile.id}`} className="px-5 py-14">
-            <img
-              className="rounded"
-              width="500"
-              height="500"
-              src={profile.url}
-            ></img>
+            <div className="div1">
+              <img
+                style={{
+                  borderRadius: "50%",
+                  background: "red",
+                  display: "block",
+                }}
+                className="rounded"
+                width="100"
+                height="100"
+                src={profile.url}
+              ></img>
+              <p>{profile.username}</p>
+            </div>
           </div>
         ))}
       </div>

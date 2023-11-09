@@ -13,9 +13,11 @@ app.use((req, res, next) => {
   next();
 });
 
+//routes
 app.use("/api/characters", cRoutes);
-app.use("/api/profiles", pRoutes);
+app.use("/api/profile", pRoutes);
 
+//connection to server and database.
 mongoose
   .connect(process.env.DB)
   .then(() => {

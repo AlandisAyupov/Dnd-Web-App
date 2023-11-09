@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useAuthContext } from "./useAuthContext";
+import axios from "axios";
 
 export const useLogin = () => {
   const [error, setError] = useState(null);
@@ -10,12 +11,16 @@ export const useLogin = () => {
     setIsLoading(true);
     setError(null);
 
-    const response = await fetch("/api/profiles/login", {
+    const response = await fetch("/api/profile/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password }),
     });
+    console.log(response);
     const json = await response.json();
+
+    console.log("data:");
+    console.log(json);
 
     if (!response.ok) {
       setIsLoading(false);
@@ -23,7 +28,7 @@ export const useLogin = () => {
     }
     if (response.ok) {
       // save the user to local storage
-      localStorage.setItem("profiles", JSON.stringify(json));
+      localStorage.setItem("profile", JSON.stringify(json));
 
       // update the auth context
       dispatch({ type: "LOGIN", payload: json });

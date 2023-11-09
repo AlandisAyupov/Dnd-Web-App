@@ -1,14 +1,33 @@
-import { Link, Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useLogout } from "../hooks/useLogout";
 import { useAuthContext } from "../hooks/useAuthContext";
+import { useEffect } from "react";
 
 const Header = () => {
   const { logout } = useLogout();
   const { profile } = useAuthContext();
+  const { dispatch } = useAuthContext();
 
   const handleClick = () => {
+    console.log(profile);
+    console.log("Logged out.");
     logout();
   };
+
+  useEffect(() => {
+    console.log("Bruh!");
+    const fetchProfiles = async () => {
+      console.log("Bruh2!");
+      const response = await fetch(`/api/profile/:${profile.username}`, {
+        method: "POST",
+      });
+      const json = await response.json();
+
+      if (response.ok) {
+        dispatch({ type: "GET_PROFILE", payload: json });
+      }
+    };
+  }, []);
 
   return (
     <header>
@@ -30,12 +49,17 @@ const Header = () => {
             <div>
               <span>{profile.email}</span>
               <button onClick={handleClick}>Log out</button>
+              {profile.url && <img src={profile.url} />}
             </div>
           )}
           {!profile && (
             <div>
-              <Link to="/login">Login</Link>
-              <Link to="/create">Signup</Link>
+              <div>
+                <Link to="/login">Login</Link>
+              </div>
+              <div>
+                <Link to="/signup">Signup</Link>
+              </div>
             </div>
           )}
         </nav>

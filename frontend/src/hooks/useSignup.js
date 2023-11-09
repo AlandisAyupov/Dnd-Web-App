@@ -18,7 +18,7 @@ export const useSignup = () => {
     formData.append("username", username);
     formData.append("email", email);
     formData.append("password", password);
-    const response = await axios.post("/api/profiles/signup", formData, {
+    const response = await axios.post("/api/profile/signup", formData, {
       headers: { "Content-Type": "multipart/form-data" },
     });
     navigate("/");
@@ -29,7 +29,7 @@ export const useSignup = () => {
     }
     if (response.ok) {
       // save the user to local storage
-      localStorage.setItem("profiles", JSON.stringify(formData));
+      localStorage.setItem("profile", JSON.stringify(formData));
 
       // update the auth context
       dispatch({ type: "LOGIN", payload: formData });

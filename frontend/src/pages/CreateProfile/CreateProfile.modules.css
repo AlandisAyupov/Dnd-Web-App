@@ -1,0 +1,16 @@
+.file-input input {
+  margin: 10px;
+}
+
+.seperate {
+  margin: 10px;
+}
+
+.main {
+  background-color: white;
+  border-radius: 5px;
+  position: relative;
+  max-width: 400px;
+  margin: 40px auto;
+  padding: 20px;
+}
