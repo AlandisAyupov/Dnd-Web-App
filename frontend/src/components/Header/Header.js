@@ -1,12 +1,15 @@
 import { Link } from "react-router-dom";
-import { useLogout } from "../hooks/useLogout";
-import { useAuthContext } from "../hooks/useAuthContext";
-import { useEffect } from "react";
+import { useLogout } from "../../hooks/useLogout";
+import { useAuthContext } from "../../hooks/useAuthContext";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
   const { logout } = useLogout();
-  const { profile } = useAuthContext();
-  const { dispatch } = useAuthContext();
+  const { profile, dispatch } = useAuthContext();
+  const [profiles, setProfiles] = useState([]);
+  let navigate = useNavigate();
 
   const handleClick = () => {
     console.log(profile);
@@ -15,18 +18,13 @@ const Header = () => {
   };
 
   useEffect(() => {
-    console.log("Bruh!");
-    const fetchProfiles = async () => {
-      console.log("Bruh2!");
-      const response = await fetch(`/api/profile/:${profile.username}`, {
-        method: "POST",
-      });
-      const json = await response.json();
-
-      if (response.ok) {
-        dispatch({ type: "GET_PROFILE", payload: json });
-      }
-    };
+    async function getProfiles() {
+      const result = await axios.get("/api/profile/");
+      setProfiles(result.data);
+    }
+    if (profile) {
+      getProfiles();
+    }
   }, []);
 
   return (
@@ -47,9 +45,14 @@ const Header = () => {
         <nav>
           {profile && (
             <div>
-              <span>{profile.email}</span>
+              <span>{profile.profile.email}</span>
               <button onClick={handleClick}>Log out</button>
-              {profile.url && <img src={profile.url} />}
+              {profiles.map(
+                (pfile) =>
+                  profile.profile.username === pfile.username && (
+                    <img src={pfile.url}></img>
+                  )
+              )}
             </div>
           )}
           {!profile && (

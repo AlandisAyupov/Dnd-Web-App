@@ -15,7 +15,7 @@ import {
 
 router.get("/", getProfiles);
 
-router.get("/:username", getProfile);
+router.get("/:id", getProfile);
 
 router.post("/signup", upload.single("image"), createProfile);
 

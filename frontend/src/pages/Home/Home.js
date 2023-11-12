@@ -11,7 +11,6 @@ const Home = () => {
 
   useEffect(() => {
     const fetchCharacters = async () => {
-      console.log("Bruh3!");
       const response = await fetch("/api/characters", {
         headers: {
           Authorization: `Bearer ${profile.token}`,

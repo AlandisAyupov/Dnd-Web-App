@@ -47,12 +47,19 @@ const getProfiles = async (req, res) => {
 };
 
 const getProfile = async (req, res) => {
-  const { username } = req.params;
-  const profile = await Profile.find({ username: username });
+  const { id } = req.params;
+  const profile = await Profile.findById(id);
   if (!profile) {
     res.status(404).json({ error: "No such profile." });
   }
-  res.status(200).json({ profile });
+  const getObjectParams = {
+    Bucket: bucketName,
+    Key: profile.name,
+  };
+  const command = new GetObjectCommand(getObjectParams);
+  const url = await getSignedUrl(s3, command, { expiresIn: 3600 });
+  profile.url = url;
+  res.status(200).json(profile);
 };
 
 const createProfile = async (req, res) => {
@@ -83,7 +90,7 @@ const createProfile = async (req, res) => {
     );
     const token = createToken(profile._id);
     console.log(profile);
-    res.status(200).json({ email, token });
+    res.status(200).json({ profile, token });
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
@@ -116,7 +123,8 @@ const loginProfile = async (req, res) => {
   try {
     const profile = await Profile.login(email, password);
     const token = createToken(profile._id);
-    res.status(200).json({ email, token });
+    console.log(profile);
+    res.status(200).json({ profile, token });
   } catch (error) {
     res.status(400).json({ error: error.message });
   }

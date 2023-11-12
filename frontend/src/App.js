@@ -10,7 +10,7 @@ import Form from "./pages/Form.js";
 import Dice from "./pages/Dice/Dice.js";
 import CreateProfile from "./pages/CreateProfile/CreateProfile.js";
 import ProfilePage from "./pages/ProfilePage/ProfilePage.js";
-import Header from "./components/Header.js";
+import Header from "./components/Header/Header.js";
 import Login from "./pages/Login/Login.js";
 import { useAuthContext } from "./hooks/useAuthContext.js";
 

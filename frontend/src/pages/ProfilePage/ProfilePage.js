@@ -17,7 +17,7 @@ const ProfilePage = () => {
 
   return (
     <div className="App">
-      <div className="flex flex-col space-y-100 items-center divide-y">
+      <div className="profile">
         {profiles.map((profile) => (
           <div key={`profile-${profile.id}`} className="px-5 py-14">
             <div className="div1">
