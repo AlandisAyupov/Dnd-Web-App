@@ -17,7 +17,12 @@ FRONTEND:
 
 BACKEND: 
 
-Unfortunetly, to run the backend without error, it requires replacing the environement varaibles (Anything starting with process.env), since the environment variables (especially process.env.DB) are keys used to require critical infrastructure for the project, such as the database, MongoDB.
+Unfortunately, to run the backend without error requires replacing the environment variables process.env.DB and process.env.PORT.
+
+Here is a tutorial detailing on how to get a uri to replace process.env.DB.
+https://www.youtube.com/watch?v=084rmLU1UgA&list=PL4cUxeGkcC9h77dJ-QJlwGlZlTd4ecZOA&index=25
+
+What you set process.env.PORT to be frankly doesn't matter.
 
 1. cd backend
 
