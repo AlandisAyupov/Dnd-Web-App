@@ -17,6 +17,8 @@ FRONTEND:
 
 BACKEND: 
 
+Unfortunetly, to run the backend without error, it requires replacing the environement varaibles (Anything starting with process.env), since the environment variables (especially process.env.DB) are keys used to require critical infrastructure for the project, such as the database, MongoDB.
+
 1. cd backend
 
 2. run "npm start"
