@@ -15,7 +15,7 @@ FRONTEND:
 
 2. run "npm install"
 
-3."npm start"
+3. run "npm start"
 
 BACKEND: 
 
@@ -30,5 +30,5 @@ What you set process.env.PORT to be frankly doesn't matter. I've set it to port 
 
 2. run "npm install"
 
-3."npm start"
+3. run "npm start"
 
