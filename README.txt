@@ -13,7 +13,9 @@ FRONTEND:
 
 1. cd frontend
 
-2. run "npm start"
+2. run "npm install"
+
+3."npm start"
 
 BACKEND: 
 
