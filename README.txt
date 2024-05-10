@@ -22,7 +22,7 @@ Unfortunately, to run the backend without error requires replacing the environme
 Here is a tutorial detailing on how to get a uri to replace process.env.DB.
 https://www.youtube.com/watch?v=084rmLU1UgA&list=PL4cUxeGkcC9h77dJ-QJlwGlZlTd4ecZOA&index=25
 
-What you set process.env.PORT to be frankly doesn't matter.
+What you set process.env.PORT to be frankly doesn't matter. I've set it to port 4000.
 
 1. cd backend
 
