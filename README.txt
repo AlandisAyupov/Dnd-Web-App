@@ -28,5 +28,7 @@ What you set process.env.PORT to be frankly doesn't matter. I've set it to port 
 
 1. cd backend
 
-2. run "npm start"
+2. run "npm install"
+
+3."npm start"
 
