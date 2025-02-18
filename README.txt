@@ -31,6 +31,8 @@ This is a full-stack CRUD web application where you can create a user and associ
     ```sh
     npm start
     ```
+    You may have to change the proxy http://localhost:4000/ to http://localhost:{BACKEND PORT HERE}/ located in the package.json file 
+    if your backend port is something other than 4000.
 
 ### Backend
 
