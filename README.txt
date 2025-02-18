@@ -47,7 +47,13 @@ To run the backend without errors, you need to replace the environment variables
     ```sh
     npm install
     ```
-3. Start the backend server:
+3. Set up the environment variables by copying the `example.env` template to a new `.env` file:
+    ```sh
+    cp example.env .env
+    ```
+    Set the port to whatever number you like, e.g: 4000, and have the DB set to a MongoDB connection URL. 
+    Check MongoDB documentation here for help: https://www.mongodb.com/docs/atlas/getting-started/
+4. Start the backend server:
     ```sh
     npm start
     ```
