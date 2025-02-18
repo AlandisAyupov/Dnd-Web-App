@@ -1,34 +1,54 @@
-Project Writeup:
-Tech Stack: MongoDB, Node.js, Express.js, React
+# DnD Web App
 
-This is a full-stack CRUD web application. You can create a user as well as associated characters for that user. 
+## Project Writeup
 
-NEED TO INSTALL: 
+This is a full-stack CRUD web application where you can create a user and associated characters for that user.
 
-node.js: https://nodejs.org/en
+## Tech Stack
 
-HOW TO RUN
+- MongoDB
+- Node.js
+- Express.js
+- React
 
-FRONTEND:
+## Installation
 
-1. cd frontend
+### Prerequisites
 
-2. run "npm install"
+- [Node.js](https://nodejs.org/en)
 
-3. run "npm start"
+### Frontend
 
-BACKEND: 
+1. Navigate to the frontend directory:
+    ```sh
+    cd frontend
+    ```
+2. Install the dependencies:
+    ```sh
+    npm install
+    ```
+3. Start the frontend server:
+    ```sh
+    npm start
+    ```
 
-Unfortunately, to run the backend without error requires replacing the environment variables process.env.DB and process.env.PORT.
+### Backend
 
-Here is a tutorial detailing on how to get a uri to replace process.env.DB.
-https://www.youtube.com/watch?v=084rmLU1UgA&list=PL4cUxeGkcC9h77dJ-QJlwGlZlTd4ecZOA&index=25
+To run the backend without errors, you need to replace the environment variables `process.env.DB` and `process.env.PORT`.
 
-What you set process.env.PORT to be frankly doesn't matter. I've set it to port 4000.
+- Follow this [tutorial](https://www.youtube.com/watch?v=084rmLU1UgA&list=PL4cUxeGkcC9h77dJ-QJlwGlZlTd4ecZOA&index=25) to get a URI to replace `process.env.DB`.
+- Set `process.env.PORT` to any port number (e.g., 4000).
 
-1. cd backend
-
-2. run "npm install"
-
-3. run "npm start"
+1. Navigate to the backend directory:
+    ```sh
+    cd backend
+    ```
+2. Install the dependencies:
+    ```sh
+    npm install
+    ```
+3. Start the backend server:
+    ```sh
+    npm start
+    ```
 
